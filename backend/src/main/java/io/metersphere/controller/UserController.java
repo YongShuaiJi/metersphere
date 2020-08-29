@@ -20,6 +20,7 @@ import io.metersphere.dto.UserRoleDTO;
 import io.metersphere.i18n.Translator;
 import io.metersphere.service.OrganizationService;
 import io.metersphere.service.UserService;
+import io.metersphere.service.UserServiceInterface;
 import io.metersphere.service.WorkspaceService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.Logical;
@@ -40,10 +41,13 @@ public class UserController {
     @Resource
     private WorkspaceService workspaceService;
 
+    @Resource
+    private UserServiceInterface userServiceInterface;
+
     @PostMapping("/special/add")
     @RequiresRoles(RoleConstants.ADMIN)
     public UserDTO insertUser(@RequestBody UserRequest user) {
-        return userService.insert(user);
+        return userServiceInterface.insert(user);
     }
 
     @PostMapping("/special/list/{goPage}/{pageSize}")

@@ -8,6 +8,7 @@
 
       <el-form :model="form" :rules="rules" ref="caseFrom" v-loading="result.loading">
 
+
         <el-row>
           <el-col :span="8" :offset="1">
             <el-form-item
@@ -18,8 +19,10 @@
               <el-input class="case-name" :disabled="readOnly" v-model="form.name"></el-input>
             </el-form-item>
           </el-col>
+        </el-row>
 
-          <el-col :span="11" :offset="2">
+        <el-row>
+          <el-col :span="10" :offset="1">
             <el-form-item :label="$t('test_track.case.module')" :label-width="formLabelWidth" prop="module">
               <el-select
                 v-model="form.module"
@@ -31,6 +34,18 @@
                   :key="item.id"
                   :label="item.path"
                   :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item :label="$t('test_track.case.method')" :label-width="formLabelWidth" prop="method">
+              <el-select :disabled="readOnly" v-model="form.method" :placeholder="$t('test_track.case.input_method')">
+                <el-option
+                  v-for="item in methodOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -72,18 +87,6 @@
                 <el-option :label="$t('commons.functional')" value="functional"></el-option>
                 <el-option :label="$t('commons.performance')" value="performance"></el-option>
                 <el-option :label="$t('commons.api')" value="api"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item :label="$t('test_track.case.method')" :label-width="formLabelWidth" prop="method">
-              <el-select :disabled="readOnly" v-model="form.method" :placeholder="$t('test_track.case.input_method')">
-                <el-option
-                  v-for="item in methodOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -523,7 +526,7 @@
   }
 
   .case-name {
-    width: 194px;
+    width: 500px;
   }
 
 </style>
