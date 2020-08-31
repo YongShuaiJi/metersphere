@@ -8,8 +8,8 @@
       </template>
 
       <el-table border class="adjust-table" :data="tableData" style="width: 100%">
-        <el-table-column prop="id" label="ID"/>
-        <el-table-column prop="name" :label="$t('commons.name')" width="200"/>
+        <el-table-column prop="username" label="用户名"/>
+        <el-table-column prop="name" :label="$t('commons.fullname')" width="200"/>
         <el-table-column :label="$t('commons.role')" width="120">
           <template v-slot:default="scope">
             <ms-roles-tag :roles="scope.row.roles"/>
@@ -53,8 +53,8 @@
     <el-dialog :title="$t('user.create')" :visible.sync="createVisible" width="35%" @closed="handleClose"
                :destroy-on-close="true">
       <el-form :model="form" label-position="right" label-width="120px" size="small" :rules="rule" ref="createUserForm">
-        <el-form-item label="$t('commons.username')" prop="username">
-          <el-input v-model="form.id" autocomplete="off" :placeholder="$t('user.input_username')"/>
+        <el-form-item :label="$t('commons.username')" prop="username">
+          <el-input v-model="form.username" autocomplete="off" :placeholder="$t('user.input_username')"/>
         </el-form-item>
         <el-form-item :label="$t('commons.fullname')" prop="name">
           <el-input v-model="form.name" autocomplete="off" :placeholder="$t('user.input_name')"/>
@@ -166,8 +166,8 @@
     <el-dialog :title="$t('user.modify')" :visible.sync="updateVisible" width="35%" :destroy-on-close="true"
                @close="handleClose" v-loading="result.loading">
       <el-form :model="form" label-position="right" label-width="120px" size="small" :rules="rule" ref="updateUserForm">
-        <el-form-item label="ID" prop="id">
-          <el-input v-model="form.id" autocomplete="off" :disabled="true"/>
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="form.username" autocomplete="off" :disabled="true"/>
         </el-form-item>
         <el-form-item :label="$t('commons.fullname')" prop="name">
           <el-input v-model="form.name" autocomplete="off"/>
@@ -414,7 +414,7 @@
         this.$get("/workspace/list", response => {
           this.$set(this.form, "wsList", response.data);
         });
-        this.$get('/userrole/all/' + row.id, response => {
+        this.$get('/userrole/all/' + row.user_id, response => {
           let data = response.data;
           this.$set(this.form, "roles", data);
         });
@@ -484,7 +484,7 @@
           this.tableData = data.listObject;
           let url = "/user/special/user/role";
           for (let i = 0; i < this.tableData.length; i++) {
-            this.$get(url + '/' + this.tableData[i].id, result => {
+            this.$get(url + '/' + this.tableData[i].user_id, result => {
               let data = result.data;
               let roles = data.roles;
               // let userRoles = result.userRoles;

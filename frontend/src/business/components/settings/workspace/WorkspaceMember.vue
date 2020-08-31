@@ -6,7 +6,7 @@
                          :create-tip="$t('member.create')" :title="$t('commons.member')"/>
       </template>
       <el-table  border class="adjust-table" :data="tableData" style="width: 100%">
-        <el-table-column prop="id" label="ID"/>
+        <el-table-column prop="username" label="用户名"/>
         <el-table-column prop="name" :label="$t('commons.fullname')"/>
         <el-table-column prop="email" :label="$t('commons.email')"/>
         <el-table-column prop="phone" :label="$t('commons.phone')"/>
@@ -68,8 +68,8 @@
     <el-dialog :title="$t('member.modify')" :visible.sync="updateVisible" width="30%" :destroy-on-close="true"
                @close="handleClose">
       <el-form :model="form" label-position="right" label-width="100px" size="small" ref="updateUserForm">
-        <el-form-item label="ID" prop="id">
-          <el-input v-model="form.id" autocomplete="off" :disabled="true"/>
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="form.username" autocomplete="off" :disabled="true"/>
         </el-form-item>
         <el-form-item :label="$t('commons.fullname')" prop="name">
           <el-input v-model="form.name" autocomplete="off" :disabled="true"/>

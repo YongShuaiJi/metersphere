@@ -62,7 +62,8 @@ public class UserService implements UserServiceInterface{
     private WorkspaceService workspaceService;
 
     public UserDTO insert(UserRequest user) {
-        checkUserParam(user);
+        // 通过校验框架校验，此校验方法省略
+         checkUserParam(user);
         //
         String username = user.getUsername();
         User user1 = userMapper.selectByUserName(username);
@@ -127,8 +128,8 @@ public class UserService implements UserServiceInterface{
 
     private void checkUserParam(User user) {
 
-        if (StringUtils.isBlank(user.getId())) {
-            MSException.throwException(Translator.get("user_id_is_null"));
+        if (StringUtils.isBlank(user.getUsername())) {
+            MSException.throwException(Translator.get("user_username_is_null"));
         }
 
         if (StringUtils.isBlank(user.getName())) {
@@ -151,6 +152,7 @@ public class UserService implements UserServiceInterface{
         user.setSource(UserSource.LOCAL.name());
         // 密码使用 MD5
         user.setPassword(CodingUtil.md5(user.getPassword()));
+        user.setUser_id(user.getUsername());
         checkEmailIsExist(user.getEmail());
         userMapper.insertSelective(user);
     }
@@ -159,6 +161,7 @@ public class UserService implements UserServiceInterface{
         user.setCreateTime(System.currentTimeMillis());
         user.setUpdateTime(System.currentTimeMillis());
         user.setStatus(UserStatus.NORMAL);
+        user.setUser_id(user.getUsername());
         checkEmailIsExist(user.getEmail());
         userMapper.insertSelective(user);
     }

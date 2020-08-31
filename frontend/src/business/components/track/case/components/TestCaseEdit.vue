@@ -60,7 +60,7 @@
                 <el-option
                   v-for="item in maintainerOptions"
                   :key="item.id"
-                  :label="item.id + ' (' + item.name + ')'"
+                  :label="item.name"
                   :value="item.id">
                 </el-option>
               </el-select>
@@ -473,10 +473,14 @@
         //递归构建节点路径
         option.id = node.id;
         option.path = option.path + '/' + node.name;
+        // 将根结点的 / 去掉
+        if (option.path.substr(0,1)=='/'){
+          option.path = option.path.replace('/','');
+        }
         moduleOptions.push(option);
         if (node.children) {
           for (let i = 0; i < node.children.length; i++) {
-            this.buildNodePath(node.children[i], {path: option.path}, moduleOptions);
+            this.buildNodePath(node.children[i], {path: option.path.replace('/','')}, moduleOptions);
           }
         }
       },
@@ -526,7 +530,7 @@
   }
 
   .case-name {
-    width: 500px;
+    width: 570px;
   }
 
 </style>
