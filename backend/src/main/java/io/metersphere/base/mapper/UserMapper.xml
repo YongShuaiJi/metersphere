@@ -3,8 +3,10 @@
 <mapper namespace="io.metersphere.base.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="io.metersphere.base.domain.User">
     <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="user_id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
@@ -74,7 +76,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `name`, email, `password`, `status`, create_time, update_time, `language`, last_workspace_id, 
+    id, `user_id`, `name`, email, username, `password`, `status`, create_time, update_time, `language`, last_workspace_id,
     last_organization_id, phone, `source`
   </sql>
   <select id="selectByExample" parameterType="io.metersphere.base.domain.UserExample" resultMap="BaseResultMap">
@@ -114,7 +116,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="io.metersphere.base.domain.User">
-    insert into user (id, `name`, email, 
+    insert into user (`name`, email,
       `password`, `status`, create_time, 
       update_time, `language`, last_workspace_id, 
       last_organization_id, phone, `source`
@@ -128,14 +130,17 @@
   <insert id="insertSelective" parameterType="io.metersphere.base.domain.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="username != null">
+        user_id,
       </if>
       <if test="name != null">
         `name`,
       </if>
       <if test="email != null">
         email,
+      </if>
+      <if test="username != null">
+        `username`,
       </if>
       <if test="password != null">
         `password`,
@@ -166,14 +171,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},

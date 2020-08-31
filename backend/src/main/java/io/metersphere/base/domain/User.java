@@ -11,6 +11,8 @@ public class User implements Serializable {
 
     private String id;
 
+    private String user_id;
+
     @NotEmpty(message="用户名不能为空")
     @Length(min = 2, max = 50, message = "用户名长度为2-50位")
     private String username;

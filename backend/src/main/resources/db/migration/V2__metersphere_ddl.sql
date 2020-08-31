@@ -150,9 +150,11 @@ CREATE TABLE IF NOT EXISTS `test_resource_pool` (
     DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `user` (
-    `id`                   varchar(50) COLLATE utf8mb4_bin NOT NULL COMMENT 'User ID',
+    `id`                   int(11) NOT NULL AUTO_INCREMENT,
+    `user_id`              varchar (50) NOT NULL COMMENT 'User_id',
     `name`                 varchar(64) NOT NULL COMMENT 'User name',
     `email`                varchar(64) NOT NULL COMMENT 'E-Mail address',
+    `username`             varchar (50) NOT NULL COMMENT '用户名',
     `password`             varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
     `status`               varchar(50) NOT NULL COMMENT 'User status',
     `create_time`          bigint(13)  NOT NULL COMMENT 'Create timestamp',

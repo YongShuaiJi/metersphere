@@ -182,7 +182,7 @@ public class WorkspaceService {
     }
 
     public List<Workspace> getWorkspaceListByOrgIdAndUserId(String orgId) {
-        String useId = SessionUtils.getUser().getId();
+        String useId = SessionUtils.getUser().getUser_id();
         WorkspaceExample workspaceExample = new WorkspaceExample();
         workspaceExample.createCriteria().andOrganizationIdEqualTo(orgId);
         List<Workspace> workspaces = workspaceMapper.selectByExample(workspaceExample);

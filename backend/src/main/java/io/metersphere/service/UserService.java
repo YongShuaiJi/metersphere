@@ -41,7 +41,7 @@ import static io.metersphere.commons.constants.SessionConstants.ATTR_USER;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UserService {
+public class UserService implements UserServiceInterface{
 
     @Resource
     private UserMapper userMapper;
@@ -64,10 +64,10 @@ public class UserService {
     public UserDTO insert(UserRequest user) {
         checkUserParam(user);
         //
-        String id = user.getId();
-        User user1 = userMapper.selectByPrimaryKey(id);
+        String username = user.getUsername();
+        User user1 = userMapper.selectByUserName(username);
         if (user1 != null) {
-            MSException.throwException(Translator.get("user_id_already_exists"));
+            MSException.throwException(Translator.get("用户名已经存在"));
         } else {
             createUser(user);
         }
@@ -75,7 +75,7 @@ public class UserService {
         if (!roles.isEmpty()) {
             insertUserRole(roles, user.getId());
         }
-        return getUserDTO(user.getId());
+        return getUser(user.getUsername());
     }
 
     public User selectUser(String userId, String email) {
@@ -169,7 +169,7 @@ public class UserService {
         criteria.andEmailEqualTo(email);
         List<User> userList = userMapper.selectByExample(userExample);
         if (!CollectionUtils.isEmpty(userList)) {
-            MSException.throwException(Translator.get("user_email_already_exists"));
+            MSException.throwException(Translator.get("用户电子邮件地址已存在"));
         }
     }
 
@@ -184,7 +184,24 @@ public class UserService {
         }
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(user, userDTO);
-        UserRoleDTO userRole = getUserRole(userId);
+        UserRoleDTO userRole = getUserRole(user.getUser_id());
+        userDTO.setUserRoles(Optional.ofNullable(userRole.getUserRoles()).orElse(new ArrayList<>()));
+        userDTO.setRoles(Optional.ofNullable(userRole.getRoles()).orElse(new ArrayList<>()));
+        return userDTO;
+    }
+
+    public UserDTO getUser(String username) {
+
+        User user = userMapper.selectByUserName(username);
+        if (user == null) {
+            return null;
+        }
+        if (StringUtils.equals(user.getStatus(), UserStatus.DISABLED)) {
+            throw new DisabledAccountException();
+        }
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        UserRoleDTO userRole = getUserRole(user.getUser_id());
         userDTO.setUserRoles(Optional.ofNullable(userRole.getUserRoles()).orElse(new ArrayList<>()));
         userDTO.setRoles(Optional.ofNullable(userRole.getRoles()).orElse(new ArrayList<>()));
         return userDTO;
@@ -329,7 +346,7 @@ public class UserService {
     }
 
     public UserDTO getUserInfo(String userId) {
-        return getUserDTO(userId);
+        return getUser(userId);
     }
 
     public List<User> getMemberList(QueryMemberRequest request) {

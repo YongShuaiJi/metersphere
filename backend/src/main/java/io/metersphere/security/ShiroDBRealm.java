@@ -50,11 +50,11 @@ public class ShiroDBRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
-        String userName = (String) principals.getPrimaryPrincipal();
+        String userid = (String) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 
         // roles 内容填充
-        UserDTO userDTO = userService.getUserDTO(userName);
+        UserDTO userDTO = userService.getUser(userid);
         Set<String> roles = userDTO.getRoles().stream().map(Role::getId).collect(Collectors.toSet());
         authorizationInfo.setRoles(roles);
 
@@ -69,16 +69,21 @@ public class ShiroDBRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String login = (String) SecurityUtils.getSubject().getSession().getAttribute("authenticate");
 
-        String userId = token.getUsername();
+        String username = token.getUsername();
         String password = String.valueOf(token.getPassword());
 
+        String userId;
+
         if (StringUtils.equals("local", runMode)) {
-            UserDTO user = getUserWithOutAuthenticate(userId);
-            userId = user.getId();
+            UserDTO user = getUserWithOutAuthenticate(username);
+            userId = user.getUser_id();
             SessionUser sessionUser = SessionUser.fromUser(user);
             SessionUtils.putUser(sessionUser);
             return new SimpleAuthenticationInfo(userId, password, getName());
         }
+
+        UserDTO user = getUserWithOutAuthenticate(username);
+        userId = user.getUser_id();
 
         if (StringUtils.equals(login, UserSource.LOCAL.name())) {
             return loginLocalMode(userId, password);
@@ -88,23 +93,21 @@ public class ShiroDBRealm extends AuthorizingRealm {
             return loginLdapMode(userId, password);
         }
 
-        UserDTO user = getUserWithOutAuthenticate(userId);
-        userId = user.getId();
         SessionUser sessionUser = SessionUser.fromUser(user);
         SessionUtils.putUser(sessionUser);
         return new SimpleAuthenticationInfo(userId, password, getName());
 
     }
 
-    private UserDTO getUserWithOutAuthenticate(String userId) {
-        UserDTO user = userService.getUserDTO(userId);
+    private UserDTO getUserWithOutAuthenticate(String username) {
+        UserDTO user = userService.getUser(username);
         String msg;
         if (user == null) {
-            user = userService.getUserDTOByEmail(userId);
+            user = userService.getUserDTOByEmail(user.getUser_id());
             if (user == null) {
-                msg = "The user does not exist: " + userId;
+                msg = "The user does not exist: " + user.getUser_id();
                 logger.warn(msg);
-                throw new UnknownAccountException(Translator.get("user_not_exist") + userId);
+                throw new UnknownAccountException(Translator.get("user_not_exist") + user.getUser_id());
             }
         }
         return user;

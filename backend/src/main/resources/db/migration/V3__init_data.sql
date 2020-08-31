@@ -1,5 +1,5 @@
-INSERT INTO user (id, name, email, password, status, create_time, update_time, language, last_workspace_id, last_organization_id, phone)
-VALUES ('admin', 'Administrator', 'admin@metersphere.io', md5('metersphere'), '1', unix_timestamp() * 1000, unix_timestamp() * 1000, NULL, '', NULL,
+INSERT INTO user (user_id,name, email, username,password, status, create_time, update_time, language, last_workspace_id, last_organization_id, phone)
+VALUES ('admin','Administrator', 'admin@metersphere.io','admin', md5('metersphere'), '1', unix_timestamp() * 1000, unix_timestamp() * 1000, NULL, '', NULL,
         NULL);
 
 INSERT INTO user_role (id, user_id, role_id, source_id, create_time, update_time)

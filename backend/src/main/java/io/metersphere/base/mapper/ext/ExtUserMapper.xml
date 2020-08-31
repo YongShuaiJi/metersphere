@@ -4,8 +4,10 @@
 
     <resultMap id="BaseResultMap" type="io.metersphere.base.domain.User">
         <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="user_id" jdbcType="VARCHAR" property="user_id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="create_time" jdbcType="BIGINT" property="createTime"/>
@@ -17,7 +19,7 @@
     </resultMap>
 
     <select id="getUserList" resultMap="BaseResultMap">
-        select u.id, u.name, u.email, u.phone, u.language, u.status, u.source,
+        select u.id, u.user_id, u.name, u.username, u.email, u.phone, u.language, u.status, u.source,
         u.last_organization_id, u.last_workspace_id, u.language, u.create_time, u.update_time
         from `user` u
         <where>
