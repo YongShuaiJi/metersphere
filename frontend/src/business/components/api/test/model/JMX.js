@@ -230,14 +230,14 @@ export class DubboSample extends DefaultTestElement {
     this.stringProp("FIELD_DUBBO_CONFIG_CENTER_PROTOCOL", this.request.configCenter.protocol);
     this.stringProp("FIELD_DUBBO_CONFIG_CENTER_GROUP", this.request.configCenter.group);
     this.stringProp("FIELD_DUBBO_CONFIG_CENTER_NAMESPACE", this.request.configCenter.namespace);
-    this.stringProp("FIELD_DUBBO_CONFIG_CENTER_USER_NAME", this.request.configCenter.username);
+    this.stringProp("FIELD_DUBBO_CONFIG_CENTER_USER_NAME", this.request.configCenter.fullname);
     this.stringProp("FIELD_DUBBO_CONFIG_CENTER_PASSWORD", this.request.configCenter.password);
     this.stringProp("FIELD_DUBBO_CONFIG_CENTER_ADDRESS", this.request.configCenter.address);
     this.stringProp("FIELD_DUBBO_CONFIG_CENTER_TIMEOUT", this.request.configCenter.timeout);
 
     this.stringProp("FIELD_DUBBO_REGISTRY_PROTOCOL", this.request.registryCenter.protocol);
     this.stringProp("FIELD_DUBBO_REGISTRY_GROUP", this.request.registryCenter.group);
-    this.stringProp("FIELD_DUBBO_REGISTRY_USER_NAME", this.request.registryCenter.username);
+    this.stringProp("FIELD_DUBBO_REGISTRY_USER_NAME", this.request.registryCenter.fullname);
     this.stringProp("FIELD_DUBBO_REGISTRY_PASSWORD", this.request.registryCenter.password);
     this.stringProp("FIELD_DUBBO_ADDRESS", this.request.registryCenter.address);
     this.stringProp("FIELD_DUBBO_REGISTRY_TIMEOUT", this.request.registryCenter.timeout);

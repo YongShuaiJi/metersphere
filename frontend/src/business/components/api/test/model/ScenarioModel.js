@@ -403,7 +403,7 @@ export class ConfigCenter extends BaseConfig {
     this.protocol = undefined;
     this.group = undefined;
     this.namespace = undefined;
-    this.username = undefined;
+    this.fullname = undefined;
     this.address = undefined;
     this.password = undefined;
     this.timeout = undefined;
@@ -412,7 +412,7 @@ export class ConfigCenter extends BaseConfig {
   }
 
   isValid() {
-    return !!this.protocol || !!this.group || !!this.namespace || !!this.username || !!this.address || !!this.password || !!this.timeout;
+    return !!this.protocol || !!this.group || !!this.namespace || !!this.fullname || !!this.address || !!this.password || !!this.timeout;
   }
 }
 
@@ -423,7 +423,7 @@ export class RegistryCenter extends BaseConfig {
     super();
     this.protocol = undefined;
     this.group = undefined;
-    this.username = undefined;
+    this.fullname = undefined;
     this.address = undefined;
     this.password = undefined;
     this.timeout = undefined;
@@ -432,7 +432,7 @@ export class RegistryCenter extends BaseConfig {
   }
 
   isValid() {
-    return !!this.protocol || !!this.group || !!this.username || !!this.address || !!this.password || !!this.timeout;
+    return !!this.protocol || !!this.group || !!this.fullname || !!this.address || !!this.password || !!this.timeout;
   }
 }
 

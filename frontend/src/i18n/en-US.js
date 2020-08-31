@@ -23,6 +23,7 @@ export default {
     input_limit: 'Within {0} and {1} characters',
     login: 'Sign In',
     welcome: 'Welcome back, please enter username and password to log in to MeterSphere',
+    fullname: 'name',
     username: 'Username',
     password: 'Password',
     input_username: 'Please enter username',
@@ -224,7 +225,7 @@ export default {
     email_format_is_incorrect: 'Email format is incorrect',
     delete_confirm: 'Are you sure you want to delete this User?',
     apikey_delete_confirm: 'Are you sure you want to delete this API Key?',
-    input_id_placeholder: 'Please enter ID (only supports numbers and English letters)',
+    input_username: 'Please enter username (only supports numbers and English letters)',
     source: 'Source'
   },
   role: {

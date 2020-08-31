@@ -14,8 +14,8 @@
                 :placeholder="$t('commons.input_content')"/>
     </el-form-item>
 
-    <el-form-item label="UserName" prop="username" class="dubbo-form-item">
-      <el-input v-model="registry.username" maxlength="100" show-word-limit
+    <el-form-item label="fullname" prop="fullname" class="dubbo-form-item">
+      <el-input v-model="registry.fullname" maxlength="100" show-word-limit
                 :placeholder="$t('commons.input_content')"/>
     </el-form-item>
 
@@ -57,7 +57,7 @@ export default {
         group: [
           {max: 300, message: this.$t('commons.input_limit', [0, 300]), trigger: 'blur'}
         ],
-        username: [
+        fullname: [
           {max: 300, message: this.$t('commons.input_limit', [0, 300]), trigger: 'blur'}
         ],
         password: [

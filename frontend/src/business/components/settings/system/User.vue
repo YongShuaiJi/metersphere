@@ -53,10 +53,10 @@
     <el-dialog :title="$t('user.create')" :visible.sync="createVisible" width="35%" @closed="handleClose"
                :destroy-on-close="true">
       <el-form :model="form" label-position="right" label-width="120px" size="small" :rules="rule" ref="createUserForm">
-        <el-form-item label="ID" prop="id">
-          <el-input v-model="form.id" autocomplete="off" :placeholder="$t('user.input_id_placeholder')"/>
+        <el-form-item label="$t('commons.username')" prop="username">
+          <el-input v-model="form.id" autocomplete="off" :placeholder="$t('user.input_username')"/>
         </el-form-item>
-        <el-form-item :label="$t('commons.username')" prop="name">
+        <el-form-item :label="$t('commons.fullname')" prop="name">
           <el-input v-model="form.name" autocomplete="off" :placeholder="$t('user.input_name')"/>
         </el-form-item>
         <el-form-item :label="$t('commons.email')" prop="email">
@@ -169,7 +169,7 @@
         <el-form-item label="ID" prop="id">
           <el-input v-model="form.id" autocomplete="off" :disabled="true"/>
         </el-form-item>
-        <el-form-item :label="$t('commons.username')" prop="name">
+        <el-form-item :label="$t('commons.fullname')" prop="name">
           <el-input v-model="form.name" autocomplete="off"/>
         </el-form-item>
         <el-form-item :label="$t('commons.email')" prop="email">

@@ -7,7 +7,7 @@
       </template>
       <el-table border class="adjust-table" :data="tableData" style="width: 100%">
         <el-table-column prop="id" label="ID"/>
-        <el-table-column prop="name" :label="$t('commons.username')"/>
+        <el-table-column prop="name" :label="$t('commons.fullname')"/>
         <el-table-column prop="email" :label="$t('commons.email')"/>
         <el-table-column prop="phone" :label="$t('commons.phone')"/>
         <el-table-column prop="roles" :label="$t('commons.role')" width="140">
@@ -78,7 +78,7 @@
         <el-form-item label="ID" prop="id">
           <el-input v-model="form.id" autocomplete="off" :disabled="true"/>
         </el-form-item>
-        <el-form-item :label="$t('commons.username')" prop="name">
+        <el-form-item :label="$t('commons.fullname')" prop="name">
           <el-input v-model="form.name" autocomplete="off" :disabled="true"/>
         </el-form-item>
         <el-form-item :label="$t('commons.email')" prop="email">

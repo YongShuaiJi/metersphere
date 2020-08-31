@@ -23,7 +23,8 @@ export default {
     input_limit: '長度在 {0} 到 {1} 個字符',
     login: '登錄',
     welcome: '歡迎回來,請輸入用戶名和密碼登錄MeterSphere',
-    username: '用戶名',
+    fullname: '姓名',
+    username: '用户名',
     password: '密碼',
     input_username: '請輸入用戶名',
     input_password: '請輸入密碼',
@@ -221,7 +222,7 @@ export default {
     email_format_is_incorrect: '郵箱格式不正確',
     delete_confirm: '這個用戶確定要刪除嗎?',
     apikey_delete_confirm: '這個 API Key 確定要刪除嗎?',
-    input_id_placeholder: '請輸入ID (只支持數字、英文字母)',
+    input_id_placeholder: '請輸入用户名 (只支持數字、英文字母)',
     source: '用戶來源'
   },
   role: {

@@ -29,7 +29,7 @@
     </el-form-item>
 
     <el-form-item label="UserName" prop="username" class="dubbo-form-item">
-      <el-input v-model="config.username" maxlength="100" show-word-limit
+      <el-input v-model="config.fullname" maxlength="100" show-word-limit
                 :placeholder="$t('commons.input_content')"/>
     </el-form-item>
 
@@ -67,7 +67,7 @@ export default {
         namespace: [
           {max: 300, message: this.$t('commons.input_limit', [0, 300]), trigger: 'blur'}
         ],
-        username: [
+        fullname: [
           {max: 100, message: this.$t('commons.input_limit', [0, 300]), trigger: 'blur'}
         ],
         password: [

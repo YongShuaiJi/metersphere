@@ -46,7 +46,7 @@
                        :create-tip="$t('member.create')" :title="$t('commons.member')"/>
       <!-- organization member table -->
       <el-table :data="memberLineData" style="width: 100%;margin-top: 5px;">
-        <el-table-column prop="name" :label="$t('commons.username')"/>
+        <el-table-column prop="name" :label="$t('commons.fullname')"/>
         <el-table-column prop="email" :label="$t('commons.email')"/>
         <el-table-column prop="phone" :label="$t('commons.phone')"/>
         <el-table-column :label="$t('commons.role')" width="120">
@@ -116,7 +116,7 @@
         <el-form-item label="ID" prop="id">
           <el-input v-model="memberForm.id" autocomplete="off" :disabled="true"/>
         </el-form-item>
-        <el-form-item :label="$t('commons.username')" prop="name">
+        <el-form-item :label="$t('commons.fullname')" prop="name">
           <el-input v-model="memberForm.name" autocomplete="off" :disabled="true"/>
         </el-form-item>
         <el-form-item :label="$t('commons.email')" prop="email">

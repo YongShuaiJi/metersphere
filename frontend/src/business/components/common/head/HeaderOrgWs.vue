@@ -50,7 +50,7 @@
           {name: this.$t('workspace.none')},
         ],
         currentUserInfo: {},
-        currentUserId: getCurrentUser().id,
+        currentUserId: getCurrentUser().user_id,
         workspaceIds: [],
         currentOrganizationName: '',
         currentWorkspaceName: ''

@@ -12,7 +12,7 @@
       <!--Personal information menu-->
       <el-table border class="adjust-table" :data="tableData" style="width: 100%">
         <el-table-column prop="id" label="ID"/>
-        <el-table-column prop="name" :label="$t('commons.username')"/>
+        <el-table-column prop="name" :label="$t('commons.fullname')"/>
         <el-table-column prop="email" :label="$t('commons.email')"/>
         <el-table-column prop="phone" :label="$t('commons.phone')"/>
         <el-table-column prop="createTime" :label="$t('commons.create_time')">
@@ -39,7 +39,7 @@
         <el-form-item label="ID" prop="id">
           <el-input v-model="form.id" autocomplete="off" :disabled="true"/>
         </el-form-item>
-        <el-form-item :label="$t('commons.username')" prop="name">
+        <el-form-item :label="$t('commons.fullname')" prop="name">
           <el-input v-model="form.name" autocomplete="off"/>
         </el-form-item>
         <el-form-item :label="$t('commons.email')" prop="email">
@@ -204,7 +204,7 @@
         })
       },
       initTableData() {
-        this.result = this.$get("/user/info/" + this.currentUser().id, response => {
+        this.result = this.$get("/user/info/" + this.currentUser().user_id, response => {
           let data = response.data;
           this.isLdapUser = response.data.source === 'LDAP' ? true : false;
           let dataList = [];
